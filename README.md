@@ -29,6 +29,7 @@ Sample:<br/>
 URL: /heroes/{heroName}<br/>
 DEscription: Displays in-detail metadata about a specific hero<br/>
 Sample:<br/>
+
 ```json
 {
 	"Status": "200",
