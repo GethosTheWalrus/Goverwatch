@@ -1,4 +1,4 @@
-# Goverwatch
+# GOverwatch
 Unofficial Overwatch API programmed from scratch using GoLang<br/>
 <br/>
 API Calls:<br/>
