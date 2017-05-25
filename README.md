@@ -1,12 +1,12 @@
 # Goverwatch
-Unofficial Overwatch API programmed from scratch using GoLang
-
-API Calls:
-
-URL: /heroes
-Description: Displays a list of all heroes and some light metadata
-Sample:
-------------------------------------------------------------------------------------------------------
+Unofficial Overwatch API programmed from scratch using GoLang<br/>
+<br/>
+API Calls:<br/>
+<br/>
+URL: /heroes<br/>
+Description: Displays a list of all heroes and some light metadata<br/>
+Sample:<br/>
+```json
 {
 	"Status": "200",
 	"RequestType": "heroesIndex",
@@ -24,12 +24,12 @@ Sample:
 		...
 	]
 }
-------------------------------------------------------------------------------------------------------
-
-URL: /heroes/{heroName}
-DEscription: Displays in-detail metadata about a specific hero
-Sample:
-------------------------------------------------------------------------------------------------------
+```
+<br/>
+URL: /heroes/{heroName}<br/>
+DEscription: Displays in-detail metadata about a specific hero<br/>
+Sample:<br/>
+```json
 {
 	"Status": "200",
 	"RequestType": "heroDetail",
@@ -66,4 +66,4 @@ Sample:
 		]
 	}
 }
-------------------------------------------------------------------------------------------------------
+```
