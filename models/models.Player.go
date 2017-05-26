@@ -5,4 +5,6 @@ type Player struct {
 	Battletag string
 	Portrait string
 	Rank [2]string
+	FeaturedStats []Stat
+	CareerStats []StatCategory
 }

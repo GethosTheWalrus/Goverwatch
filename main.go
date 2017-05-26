@@ -13,7 +13,7 @@ func main() {
     router.HandleFunc("/", routes.Index)
     router.HandleFunc("/heroes", routes.HeroesIndex)
     router.HandleFunc("/heroes/{heroName}", routes.HeroDetail)
-    router.HandleFunc("/players/{battleTag}", routes.PlayerDetail)
+    router.HandleFunc("/players/{platform}/{region}/{gameMode}/{battleTag}", routes.PlayerDetail)
 
     log.Fatal(http.ListenAndServe(":3000", router))
 
