@@ -27,7 +27,7 @@ Sample:<br/>
 ```
 <br/>
 URL: /heroes/{heroName}<br/>
-DEscription: Displays in-detail metadata about a specific hero<br/>
+Description: Displays in-detail metadata about a specific hero<br/>
 Sample:<br/>
 
 ```json
@@ -69,3 +69,189 @@ Sample:<br/>
 }
 ```
 
+<br/>
+URL: /players/{platform}/{region}/{gameMode}/{battleTag}<br/>
+Description: Displays detailed profile information and statistics about a certain player (battle tag)<br/>
+Sample:<br/>
+
+```json
+{
+	"Status": "200",
+	"RequestType": "PlayerDetail",
+	"Data": {
+		"Name": "Gethos",
+		"Battletag": "Gethos-1743",
+		"Portrait": "https://blzgdapipro-a.akamaihd.net/game/unlocks/0x02500000000008C1.png",
+		"Rank": [
+			"https://blzgdapipro-a.akamaihd.net/game/rank-icons/season-2/rank-4.png",
+			"24832483"
+		],
+		"FeaturedStats": [
+			{
+				"Name": "Eliminations - Average",
+				"Value": "13.84",
+				"Icon": "<svg viewBox=\"0 0 32 32\" class=\"icon\"><use xlink:href=\"https://overwatch-a.akamaihd.net/img/icons/career-icons-9f59a643a3181e5bb684871c67ae3b62b6476ddeebd073310fe61baf6de3322ebeb80ec0e1f31a6817d164c6b2856c9f1830a3eeb11fb2c1d119a11dfba17437.svg#0x0860000000000383\"></use></svg>"
+			},
+			...
+		],
+		"CareerStats": [
+			{
+				"Name": "Combat",
+				"Icon": "<use xlink:href=\"https://overwatch-a.akamaihd.net/img/icons/career-icons-9f59a643a3181e5bb684871c67ae3b62b6476ddeebd073310fe61baf6de3322ebeb80ec0e1f31a6817d164c6b2856c9f1830a3eeb11fb2c1d119a11dfba17437.svg#combat\"></use>",
+				"Stats": [
+					{
+						"Name": "Melee Final Blows",
+						"Value": "95",
+						"Icon": ""
+					},
+					...
+				]
+			},
+			{
+				"Name": "Assists",
+				"Icon": "<use xlink:href=\"https://overwatch-a.akamaihd.net/img/icons/career-icons-9f59a643a3181e5bb684871c67ae3b62b6476ddeebd073310fe61baf6de3322ebeb80ec0e1f31a6817d164c6b2856c9f1830a3eeb11fb2c1d119a11dfba17437.svg#assists\"></use>",
+				"Stats": [
+					{
+						"Name": "Healing Done",
+						"Value": "529,596",
+						"Icon": ""
+					},
+					...
+				]
+			},
+			{
+				"Name": "Best",
+				"Icon": "<use xlink:href=\"https://overwatch-a.akamaihd.net/img/icons/career-icons-9f59a643a3181e5bb684871c67ae3b62b6476ddeebd073310fe61baf6de3322ebeb80ec0e1f31a6817d164c6b2856c9f1830a3eeb11fb2c1d119a11dfba17437.svg#best\"></use>",
+				"Stats": [
+					{
+						"Name": "Eliminations - Most in Game",
+						"Value": "44",
+						"Icon": ""
+					},
+					...
+				]
+			},
+			{
+				"Name": "Average",
+				"Icon": "<use xlink:href=\"https://overwatch-a.akamaihd.net/img/icons/career-icons-9f59a643a3181e5bb684871c67ae3b62b6476ddeebd073310fe61baf6de3322ebeb80ec0e1f31a6817d164c6b2856c9f1830a3eeb11fb2c1d119a11dfba17437.svg#average\"></use>",
+				"Stats": [
+					{
+						"Name": "Melee Final Blows - Average",
+						"Value": "0.14",
+						"Icon": ""
+					},
+					...
+				]
+			},
+			{
+				"Name": "Deaths",
+				"Icon": "<use xlink:href=\"https://overwatch-a.akamaihd.net/img/icons/career-icons-9f59a643a3181e5bb684871c67ae3b62b6476ddeebd073310fe61baf6de3322ebeb80ec0e1f31a6817d164c6b2856c9f1830a3eeb11fb2c1d119a11dfba17437.svg#deaths\"></use>",
+				"Stats": [
+					{
+						"Name": "Deaths",
+						"Value": "4,459",
+						"Icon": ""
+					},
+					...
+				]
+			},
+			{
+				"Name": "Match Awards",
+				"Icon": "<use xlink:href=\"https://overwatch-a.akamaihd.net/img/icons/career-icons-9f59a643a3181e5bb684871c67ae3b62b6476ddeebd073310fe61baf6de3322ebeb80ec0e1f31a6817d164c6b2856c9f1830a3eeb11fb2c1d119a11dfba17437.svg#matchawards\"></use>",
+				"Stats": [
+					{
+						"Name": "Cards",
+						"Value": "195",
+						"Icon": ""
+					},
+					...
+				]
+			},
+			{
+				"Name": "Game",
+				"Icon": "<use xlink:href=\"https://overwatch-a.akamaihd.net/img/icons/career-icons-9f59a643a3181e5bb684871c67ae3b62b6476ddeebd073310fe61baf6de3322ebeb80ec0e1f31a6817d164c6b2856c9f1830a3eeb11fb2c1d119a11dfba17437.svg#game\"></use>",
+				"Stats": [
+					{
+						"Name": "Games Won",
+						"Value": "353",
+						"Icon": ""
+					},
+					...
+				]
+			},
+			{
+				"Name": "Miscellaneous",
+				"Icon": "<use xlink:href=\"https://overwatch-a.akamaihd.net/img/icons/career-icons-9f59a643a3181e5bb684871c67ae3b62b6476ddeebd073310fe61baf6de3322ebeb80ec0e1f31a6817d164c6b2856c9f1830a3eeb11fb2c1d119a11dfba17437.svg#misc\"></use>",
+				"Stats": [
+					{
+						"Name": "Melee Final Blows - Most in Game",
+						"Value": "3",
+						"Icon": ""
+					},
+					...
+				]
+			},
+			{
+				"Name": "Hero Specific",
+				"Icon": "<use xlink:href=\"https://overwatch-a.akamaihd.net/img/icons/career-icons-9f59a643a3181e5bb684871c67ae3b62b6476ddeebd073310fe61baf6de3322ebeb80ec0e1f31a6817d164c6b2856c9f1830a3eeb11fb2c1d119a11dfba17437.svg#0x02E0000000000002\"></use>",
+				"Stats": [
+					{
+						"Name": "Souls Consumed",
+						"Value": "376",
+						"Icon": ""
+					},
+					...
+				]
+			},
+			{
+				"Name": "Combat",
+				"Icon": "<use xlink:href=\"https://overwatch-a.akamaihd.net/img/icons/career-icons-9f59a643a3181e5bb684871c67ae3b62b6476ddeebd073310fe61baf6de3322ebeb80ec0e1f31a6817d164c6b2856c9f1830a3eeb11fb2c1d119a11dfba17437.svg#combat\"></use>",
+				"Stats": [
+					{
+						"Name": "Eliminations",
+						"Value": "539",
+						"Icon": ""
+					},
+					...
+				]
+			},
+			{
+				"Name": "Assists",
+				"Icon": "<use xlink:href=\"https://overwatch-a.akamaihd.net/img/icons/career-icons-9f59a643a3181e5bb684871c67ae3b62b6476ddeebd073310fe61baf6de3322ebeb80ec0e1f31a6817d164c6b2856c9f1830a3eeb11fb2c1d119a11dfba17437.svg#assists\"></use>",
+				"Stats": [
+					{
+						"Name": "Healing Done",
+						"Value": "13,582",
+						"Icon": ""
+					},
+					...
+				]
+			},
+			{
+				"Name": "Best",
+				"Icon": "<use xlink:href=\"https://overwatch-a.akamaihd.net/img/icons/career-icons-9f59a643a3181e5bb684871c67ae3b62b6476ddeebd073310fe61baf6de3322ebeb80ec0e1f31a6817d164c6b2856c9f1830a3eeb11fb2c1d119a11dfba17437.svg#best\"></use>",
+				"Stats": [
+					{
+						"Name": "Eliminations - Most in Life",
+						"Value": "13",
+						"Icon": ""
+					},
+					...
+				]
+			},
+			{
+				"Name": "Average",
+				"Icon": "<use xlink:href=\"https://overwatch-a.akamaihd.net/img/icons/career-icons-9f59a643a3181e5bb684871c67ae3b62b6476ddeebd073310fe61baf6de3322ebeb80ec0e1f31a6817d164c6b2856c9f1830a3eeb11fb2c1d119a11dfba17437.svg#average\"></use>",
+				"Stats": [
+					{
+						"Name": "Melee Final Blows - Average",
+						"Value": "0.13",
+						"Icon": ""
+					},
+					...
+				]
+			},
+	    ]
+	}
+}
+```
