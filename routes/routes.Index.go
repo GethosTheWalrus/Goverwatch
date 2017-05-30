@@ -1,3 +1,4 @@
+// Package containing the functions that will be called for each route
 package routes
 
 import (

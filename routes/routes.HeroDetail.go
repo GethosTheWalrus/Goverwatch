@@ -16,10 +16,13 @@ import (
 // URL: /heroes/{heroName}
 func HeroDetail(w http.ResponseWriter, r *http.Request) {
 
-	// Define constants
+	// Route parameters
 	vars := mux.Vars(r)
+	// Name of the requested hero
     heroName := vars["heroName"]
+    // HTML container where data is being scraped from
 	const selectionContainer = "body section#overview"
+	// URL of the request
 	url := "https://playoverwatch.com/en-us/heroes/" + heroName
 
 	// Fetch document body
@@ -33,10 +36,15 @@ func HeroDetail(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Scrape values from web document
+
+	// Hero difficulty rating
 	heroDifficulty := doc.Find("body section#overview div.hero-detail-wrapper div.hero-detail-difficulty .star").Length() - doc.Find("div.hero-detail-wrapper div.hero-detail-difficulty .star.m-empty").Length()
+	// Hero roles
 	heroRole := doc.Find("body section#overview div.hero-detail-wrapper h4.hero-detail-role-name").Text()
+	// Hero description
 	heroDescription := doc.Find("body section#overview div.hero-detail-wrapper p.hero-detail-description").Text()
 	
+	// Hero videos (idle pose, etc)
 	heroVideos := make([]string, 0, 0)
 	doc.Find("div.hero-detail-video source").Each(func(index int, item *goquery.Selection) {
 
@@ -45,6 +53,7 @@ func HeroDetail(w http.ResponseWriter, r *http.Request) {
 
 	})
 
+	// List of hero abilities
 	heroAbilities := make([]models.Ability, 0, 0)
 	doc.Find("body section#overview .hero-ability").Each(func(index int, item *goquery.Selection) {
 
