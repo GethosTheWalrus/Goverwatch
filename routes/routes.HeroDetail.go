@@ -10,6 +10,10 @@ import (
 	"models"
 )
 
+// HeroDetail will return a data object consisting of a specific hero's
+// difficulty, role, description, idle animation, and a list of that hero's
+// ability names, descriptions, and icons
+// URL: /heroes/{heroName}
 func HeroDetail(w http.ResponseWriter, r *http.Request) {
 
 	// Define constants

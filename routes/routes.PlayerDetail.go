@@ -80,6 +80,7 @@ func CareerStats(wg *sync.WaitGroup, careerStatsObject *[]models.StatCategory, d
 
 // PlayerDetail will combine a user's featured stats, career stats, hero played time, into a JSON object and 
 // print the result to the browser
+// URL: /players/{platform}/{region}/{gameMode}/{battleTag} (only us and eu are currently supported for region)
 func PlayerDetail(w http.ResponseWriter, r *http.Request) {
 
 	// Create workgroup to wait for all goroutines to finish

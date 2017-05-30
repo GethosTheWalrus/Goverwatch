@@ -9,6 +9,9 @@ import (
 	"models"
 )
 
+// HeroesIndex will return a list of all Overwatch heroes
+// along with their respective names, portraits, and role(s)
+// URL: /heroes
 func HeroesIndex(w http.ResponseWriter, r *http.Request) {
 	// Define constants
 	const selectionContainer = "body div.hero-portrait-detailed-container"
