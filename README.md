@@ -251,7 +251,22 @@ Sample:<br/>
 					...
 				]
 			},
-	    ]
+	    ],
+	    "HeroMetrics": [
+			{
+				"Name": "Time Played",
+				"Heroes": [
+					{
+						"Name": "Roadhog",
+						"Value": "2 hours",
+						"Image": "https://blzgdapipro-a.akamaihd.net/game/heroes/small/0x02E0000000000040.png",
+						"Percent": "1"
+					},
+					...
+				]
+			}
+			...
+		]
 	}
 }
 ```

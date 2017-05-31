@@ -15,4 +15,5 @@ type Player struct {
 	Rank [2]string
 	FeaturedStats []Stat
 	CareerStats []StatCategory
+	HeroMetrics []HeroComparisonMetric
 }

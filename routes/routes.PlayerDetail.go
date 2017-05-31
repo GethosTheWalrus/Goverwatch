@@ -78,6 +78,52 @@ func CareerStats(wg *sync.WaitGroup, careerStatsObject *[]models.StatCategory, d
 	defer wg.Done()
 }
 
+// HeroComparison will scrape Blizzard's Overwatch user profile page for that account's
+// hero comparison metrics, such as played time, games won, etc. This will return an
+// object that contains all available metrics for the specified game type
+// 
+// Parameters: 
+// wg - A pointer to a wait group that will allow both goroutines to finish before creating the player object
+// featuredStatsObject - A pointer to the object that will be used when creating the player object
+// doc - The document body that GoQuery will be scraping from
+// gameMode - The game mode that should be searched for in the DOM
+func HeroComparison(wg *sync.WaitGroup, heroComparisonMetricsObject *[]models.HeroComparisonMetric, doc *goquery.Document, gameMode string) {
+	// Loop through the available metrics
+	heroComparisonMetrics := make([]models.HeroComparisonMetric, 0, 0)
+	doc.Find("#" + gameMode + " select[data-group-id='comparisons'] option").Each(func(index int, item *goquery.Selection) {
+
+		// Get the identifier for each metric from the dropdown and loop through the
+		// container for that identifier
+		overwatchGuid, _ := item.Attr("value")
+		metricName := item.Text()
+		heroComparisonHeroes := make([]models.HeroComparisonHero, 0, 0)
+		hch := models.HeroComparisonHero{"", "", "", ""}
+		doc.Find("#" + gameMode + " div[data-category-id='" + overwatchGuid + "'] div.progress-category-item").Each(func(index int, progressItem *goquery.Selection) {
+
+			// Scrape the stats from the specified container
+			heroName := progressItem.Find("div.bar-text div.title").Text()
+			metricValue := progressItem.Find("div.bar-text div.description").Text()
+			heroImage, _ := progressItem.Find("img").Attr("src")
+			metricPercent, _ := progressItem.Attr("data-overwatch-progress-percent")
+
+			// Create a hero object and store the values,
+			// then append the object to the slice of heroes
+			hch = models.HeroComparisonHero{heroName, metricValue, heroImage, metricPercent}
+			heroComparisonHeroes = append(heroComparisonHeroes, hch)
+
+		})
+
+		// Add the metric to the slice of metrics and add the metric
+		// to the slice of metrics
+		hcm := models.HeroComparisonMetric{metricName, heroComparisonHeroes}
+		heroComparisonMetrics = append(heroComparisonMetrics, hcm)
+
+	})
+
+	*heroComparisonMetricsObject = heroComparisonMetrics
+	defer wg.Done()
+}
+
 // PlayerDetail will combine a user's featured stats, career stats, hero played time, into a JSON object and 
 // print the result to the browser
 // URL: /players/{platform}/{region}/{gameMode}/{battleTag} (only us and eu are currently supported for region)
@@ -121,9 +167,14 @@ func PlayerDetail(w http.ResponseWriter, r *http.Request) {
 	careerStatsObject := make([]models.StatCategory, 0, 0)
 	go CareerStats(&wg, &careerStatsObject, doc, gameMode)
 
+	// Hero Comparison Metrics
+	wg.Add(1)
+	heroComparisonMetricsObject := make([]models.HeroComparisonMetric, 0, 0)
+	go HeroComparison(&wg, &heroComparisonMetricsObject, doc, gameMode)
+
 	// Create player struct
 	wg.Wait()
-	p := models.Player{playerName, battleTag, playerPortrait, playerRank, featuredStatsObject, careerStatsObject}
+	p := models.Player{playerName, battleTag, playerPortrait, playerRank, featuredStatsObject, careerStatsObject, heroComparisonMetricsObject}
 
 	// Create response struct
 	res, _ := json.Marshal(models.Response{"200", "PlayerDetail", p})
