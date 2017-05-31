@@ -154,7 +154,7 @@ func PlayerDetail(w http.ResponseWriter, r *http.Request) {
 	playerName := doc.Find("div.masthead h1.header-masthead").Text()
 	playerPortrait, _ := doc.Find("div.masthead img.player-portrait").Attr("src")
 	playerRankIcon, _ := doc.Find("div.masthead div.competitive-rank img").Attr("src")
-	playerRankNumber := doc.Find("div.masthead div.competitive-rank div.h6").Text()
+	playerRankNumber := doc.Find("div.masthead div.competitive-rank div.h6").First().Text()
 	playerRank := [2]string{playerRankIcon, playerRankNumber}
 
 	// Featured Stats
