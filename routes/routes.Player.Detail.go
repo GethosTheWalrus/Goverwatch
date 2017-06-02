@@ -274,9 +274,10 @@ func CareerStatsDetail(w http.ResponseWriter, r *http.Request) {
 
 }
 
-// CareerStatsDetail will return a list of a user's career stats, or an individual career stat
+// HeroComparisonDetail will return a list of metrics by which a player's hero performance is measured for each hero and values
+// associated with each metric. This request can be limited to a single hero, a single stat, or a single stat FOR a single hero
 // print the result to the browser
-// URL: /players/{platform}/{region}/{gameMode}/{battleTag}/careerStats/{statName?} (only us and eu are currently supported for region)
+// URL: /players/{platform}/{region}/{gameMode}/{battleTag}/heroComparison/[hero/{heroName},stat/{statName},hero/{heroName}/stat/{statName}]? (only us and eu are currently supported for region)
 func HeroComparisonDetail(w http.ResponseWriter, r *http.Request) {
 
 	// Create workgroup to wait for all goroutines to finish
