@@ -156,6 +156,15 @@ func PlayerDetail(w http.ResponseWriter, r *http.Request) {
     gameMode := vars["gameMode"]
 	url := "https://playoverwatch.com/en-us/career/" + platform + "/" + region + "/" + battleTag
 
+	// Check cache before making request
+	cachedData := readCache("PlayerDetail", "players-" + platform + "-" + region + "-" + gameMode + "-" + battleTag)
+	if cachedData != "" {
+
+		fmt.Fprintln(w, cachedData)
+		return;
+
+	}
+
 	// Fetch document body
     doc, err := goquery.NewDocument(url)
 
@@ -196,6 +205,9 @@ func PlayerDetail(w http.ResponseWriter, r *http.Request) {
 	res, _ := json.Marshal(models.Response{"200", "PlayerDetail", p})
 	fmt.Fprintln(w, string(res))
 
+	// Cache response for future use
+	cache("PlayerDetail", "players-" + platform + "-" + region + "-" + gameMode + "-" + battleTag, string(res))
+
 }
 
 // FeaturedStatsDetail will return a list of a user's featured stats, or an individual featured stat
@@ -214,6 +226,15 @@ func FeaturedStatsDetail(w http.ResponseWriter, r *http.Request) {
     gameMode := vars["gameMode"]
     statNameParam := vars["statName"]
 	url := "https://playoverwatch.com/en-us/career/" + platform + "/" + region + "/" + battleTag
+
+	// Check cache before making request
+	cachedData := readCache("FeaturedStatsDetail", "players-" + platform + "-" + region + "-" + gameMode + "-" + battleTag + "|stat=" + statNameParam)
+	if cachedData != "" {
+
+		fmt.Fprintln(w, cachedData)
+		return;
+
+	}
 
 	// Fetch document body
     doc, err := goquery.NewDocument(url)
@@ -234,6 +255,8 @@ func FeaturedStatsDetail(w http.ResponseWriter, r *http.Request) {
 	res, _ := json.Marshal(models.Response{"200", "FeaturedStatsDetail", featuredStatsObject})
 	fmt.Fprintln(w, string(res))
 
+	cache("FeaturedStatsDetail", "players-" + platform + "-" + region + "-" + gameMode + "-" + battleTag + "|stat=" + statNameParam, string(res))
+
 }
 
 // CareerStatsDetail will return a list of a user's career stats, or an individual career stat
@@ -253,6 +276,15 @@ func CareerStatsDetail(w http.ResponseWriter, r *http.Request) {
     statNameParam := vars["statName"]
 	url := "https://playoverwatch.com/en-us/career/" + platform + "/" + region + "/" + battleTag
 
+	// Check cache before making request
+	cachedData := readCache("CareerStatsDetail", "players-" + platform + "-" + region + "-" + gameMode + "-" + battleTag + "|stat=" + statNameParam)
+	if cachedData != "" {
+
+		fmt.Fprintln(w, cachedData)
+		return;
+
+	}
+
 	// Fetch document body
     doc, err := goquery.NewDocument(url)
 
@@ -271,6 +303,8 @@ func CareerStatsDetail(w http.ResponseWriter, r *http.Request) {
 	wg.Wait()
 	res, _ := json.Marshal(models.Response{"200", "CareerStatsDetail", careerStatsObject})
 	fmt.Fprintln(w, string(res))
+
+	cache("CareerStatsDetail", "players-" + platform + "-" + region + "-" + gameMode + "-" + battleTag + "|stat=" + statNameParam, string(res))
 
 }
 
@@ -293,6 +327,15 @@ func HeroComparisonDetail(w http.ResponseWriter, r *http.Request) {
     statNameParam := vars["statName"]
 	url := "https://playoverwatch.com/en-us/career/" + platform + "/" + region + "/" + battleTag
 
+	// Check cache before making request
+	cachedData := readCache("HeroComparisonDetail", "players-" + platform + "-" + region + "-" + gameMode + "-" + battleTag + "|hero=" + heroNameParam + "|stat=" + statNameParam)
+	if cachedData != "" {
+
+		fmt.Fprintln(w, cachedData)
+		return;
+
+	}
+
 	// Fetch document body
     doc, err := goquery.NewDocument(url)
 
@@ -311,5 +354,7 @@ func HeroComparisonDetail(w http.ResponseWriter, r *http.Request) {
 	wg.Wait()
 	res, _ := json.Marshal(models.Response{"200", "HeroComparisonDetail", heroComparisonMetricsObject})
 	fmt.Fprintln(w, string(res))
+
+	cache("HeroComparisonDetail", "players-" + platform + "-" + region + "-" + gameMode + "-" + battleTag + "|hero=" + heroNameParam + "|stat=" + statNameParam, string(res))
 
 }

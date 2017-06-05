@@ -10,6 +10,8 @@ import (
 func main() {
 
     router := mux.NewRouter().StrictSlash(true)
+
+    // Main Routes
     router.HandleFunc("/", routes.Index)
     router.HandleFunc("/heroes", routes.HeroesIndex)
     router.HandleFunc("/heroes/{heroName}", routes.HeroDetail)

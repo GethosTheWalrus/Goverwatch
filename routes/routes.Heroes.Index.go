@@ -17,6 +17,15 @@ func HeroesIndex(w http.ResponseWriter, r *http.Request) {
 	const selectionContainer = "body div.hero-portrait-detailed-container"
 	const url = "https://playoverwatch.com/en-us/heroes/"
 
+	// Check cache before making request
+	cachedData := readCache("HeroesIndex", "heroes")
+	if cachedData != "" {
+
+		fmt.Fprintln(w, cachedData)
+		return;
+
+	}
+
 	// Fetch document body
     doc, err := goquery.NewDocument(url)
 
@@ -47,5 +56,8 @@ func HeroesIndex(w http.ResponseWriter, r *http.Request) {
 	// Create response struct
 	res, _ := json.Marshal(models.Response{"200", "heroesIndex", heroList})
 	fmt.Fprintln(w, string(res))
+
+	// Cache response for future use
+	cache("HeroesIndex", "heroes", string(res))
 
 }

@@ -25,6 +25,15 @@ func HeroDetail(w http.ResponseWriter, r *http.Request) {
 	// URL of the request
 	url := "https://playoverwatch.com/en-us/heroes/" + heroName
 
+	// Check cache before making request
+	cachedData := readCache("HeroDetail", "heroes-" + heroName)
+	if cachedData != "" {
+
+		fmt.Fprintln(w, cachedData)
+		return;
+
+	}
+
 	// Fetch document body
     doc, err := goquery.NewDocument(url)
 
@@ -76,5 +85,8 @@ func HeroDetail(w http.ResponseWriter, r *http.Request) {
 	// Create response struct
 	res, _ := json.Marshal(models.Response{"200", "heroDetail", h})
 	fmt.Fprintln(w, string(res))
+
+	// Cache response for future use
+	cache("HeroDetail", "heroes-" + heroName, string(res))
 
 }
